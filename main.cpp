@@ -5,20 +5,16 @@ void pressButton(char button) {
   INPUT ip;
   
   ip.type = INPUT_KEYBOARD;
-  ip.ki.wScan = button; // hardware scan code for key
-  ip.ki.time = 0;
-  ip.ki.dwExtraInfo = 0;
-
-  // Press the "A" key
-  ip.ki.wVk = button; // virtual-key code for the "a" key
-  ip.ki.dwFlags = 0; // 0 for key press
+  ip.ki.wScan = button;
+  ip.ki.wVk = button;
 
   UINT i = 0;
-  do {
+  do {//Pressing key
     i = SendInput(1, &ip, sizeof(INPUT));
   } while(i == 0);
+  
   ip.ki.dwFlags=KEYEVENTF_KEYUP;
-  do {
+  do {//Realising key
     i = SendInput(1, &ip, sizeof(INPUT));
   } while(i == 0);
 }
